@@ -10,8 +10,8 @@ matrix:
   fast_finish: true
   allow_failures:
     # To allow failures, you need to specify the full environment
-    - env: REQUIREMENTS=devel EXTRAS=all,elasticsearch5 ES_URL=$ES5_DOWNLOAD_URL
-    - env: REQUIREMENTS=devel EXTRAS=all,elasticsearch6 ES_URL=$ES6_DOWNLOAD_URL
+    - env: REQUIREMENTS=devel EXTRAS=all,elasticsearch5,postgresql ES_URL=$ES5_DOWNLOAD_URL
+    - env: REQUIREMENTS=devel EXTRAS=all,elasticsearch6,mysql ES_URL=$ES6_DOWNLOAD_URL
 
 cache:
   - pip
@@ -23,12 +23,13 @@ env:
     - ES_HOST=127.0.0.1
   matrix:
     - REQUIREMENTS=release EXTRAS=all,elasticsearch5,postgresql ES_URL=$ES5_DOWNLOAD_URL DEPLOY=true
+    - REQUIREMENTS=release EXTRAS=all,elasticsearch5,mysql ES_URL=$ES5_DOWNLOAD_URL DEPLOY=true
+    - REQUIREMENTS=release EXTRAS=all,elasticsearch6,postgresql ES_URL=$ES6_DOWNLOAD_URL
     - REQUIREMENTS=release EXTRAS=all,elasticsearch6,mysql ES_URL=$ES6_DOWNLOAD_URL
     - REQUIREMENTS=devel EXTRAS=all,elasticsearch5,postgresql ES_URL=$ES5_DOWNLOAD_URL
     - REQUIREMENTS=devel EXTRAS=all,elasticsearch6,mysql ES_URL=$ES6_DOWNLOAD_URL
 
 python:
-  - "3.5"
   - "3.6"
 
 before_install:
