@@ -26,14 +26,11 @@ class {{ cookiecutter.extension_class }}(object):
         """
         for k in dir(config):
             if k.startswith('{{ cookiecutter.package_name | upper }}_'):
-                app.config.update(k, getattr(config, k))
+                app.config.setdefault(k, getattr(config, k))
             elif k == 'RECORDS_REST_ENDPOINTS' \
                     and app.config.get(
                         '{{ cookiecutter.package_name | upper }}_ENDPOINTS_ENABLED', True):
-                if 'RECORDS_REST_ENDPOINTS' in app.config:
-                    app.config['RECORDS_REST_ENDPOINTS'].update(
-                        getattr(config, k))
-                else:
-                    app.config['RECORDS_REST_ENDPOINTS'] = getattr(config, k)
+                app.config.setdefault('RECORDS_REST_ENDPOINTS', {})
+                app.config['RECORDS_REST_ENDPOINTS'].update(getattr(config, k))
             elif k == 'PIDSTORE_RECID_FIELD':
                 app.config['PIDSTORE_RECID_FIELD'] = getattr(config, k)
