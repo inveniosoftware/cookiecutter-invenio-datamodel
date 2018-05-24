@@ -47,5 +47,6 @@ class RecordSchemaV1(StrictKeysMixin):
     created = fields.Str(dump_only=True)
     revision = fields.Integer(dump_only=True)
     updated = fields.Str(dump_only=True)
-    id = fields.Number(
+    links = fields.Dict(dump_only=True)
+    id = fields.Integer(
         required=True, attribute='metadata.{{ cookiecutter.pid_name }}')
