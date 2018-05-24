@@ -4,11 +4,6 @@
 from invenio_indexer.api import RecordIndexer
 from invenio_search import RecordsSearch
 
-# TODO: update your instance configuration
-# from invenio_records_rest.config import RECORDS_REST_ENDPOINTS
-# from {{ cookiecutter.package_name }}.config import {{ cookiecutter.package_name | upper }}_RECORDS_REST_ENDPOINTS
-# RECORDS_REST_ENDPOINTS.update({{ cookiecutter.package_name | upper }}_RECORDS_REST_ENDPOINTS)
-
 RECORDS_REST_ENDPOINTS = {
     '{{ cookiecutter.pid_name}}':
     dict(
