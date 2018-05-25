@@ -2,10 +2,10 @@
 
 """JSON Schemas."""
 
+from invenio_records_rest.schemas.json import StrictKeysMixin
 from invenio_records_rest.serializers.fields import DateString, \
     SanitizedUnicode
-from invenio_records_rest.serializers.schemas.json import StrictKeysMixin
-from marshmallow import fields, missing
+from marshmallow import fields, missing, validate
 
 
 def get_{{ cookiecutter.pid_name }}(obj, context):
@@ -34,10 +34,13 @@ class ContributorSchemaV1(StrictKeysMixin):
 class MetadataSchemaV1(StrictKeysMixin):
     """Schema for the record metadata."""
 
-    {{ cookiecutter.pid_name }} = fields.Method(
-        serialize=get_{{ cookiecutter.pid_name }},
-        deserialize=get_{{ cookiecutter.pid_name }})
-    title = SanitizedUnicode(required=True)
+    def get_{{ cookiecutter.pid_name }}(self, obj):
+        """Get record id."""
+        pid = self.context.get('pid')
+        return pid.pid_value if pid else missing
+
+    {{ cookiecutter.pid_name }} = fields.Method(deserialize='get_{{ cookiecutter.pid_name }}')
+    title = SanitizedUnicode(required=True, validate=validate.Length(min=3))
     keywords = fields.Nested(fields.Str(), many=True)
     publication_date = DateString()
     contributors = fields.Nested(ContributorSchemaV1, many=True, required=True)
