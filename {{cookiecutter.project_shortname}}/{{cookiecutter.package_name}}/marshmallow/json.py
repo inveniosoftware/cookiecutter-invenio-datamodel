@@ -8,6 +8,12 @@ from invenio_records_rest.serializers.schemas.json import StrictKeysMixin
 from marshmallow import fields, missing
 
 
+def get_{{ cookiecutter.pid_name }}(obj, context):
+    """Get record id."""
+    pid = self.context.get('pid')
+    return pid.pid_value if pid else missing
+
+
 class PersonIdsSchemaV1(StrictKeysMixin):
     """Ids schema."""
 
@@ -28,12 +34,9 @@ class ContributorSchemaV1(StrictKeysMixin):
 class MetadataSchemaV1(StrictKeysMixin):
     """Schema for the record metadata."""
 
-    def get_{{ cookiecutter.pid_name }}(self, obj):
-        """Get record id."""
-        pid = self.context.get('pid')
-        return pid.pid_value if pid else missing
-
-    {{ cookiecutter.pid_name }} = fields.Method(deserialize='get_{{ cookiecutter.pid_name }}')
+    {{ cookiecutter.pid_name }} = fields.Method(
+        serialize=get_{{ cookiecutter.pid_name }},
+        deserialize=get_{{ cookiecutter.pid_name }})
     title = SanitizedUnicode(required=True)
     keywords = fields.Nested(fields.Str(), many=True)
     publication_date = DateString()
@@ -48,5 +51,6 @@ class RecordSchemaV1(StrictKeysMixin):
     revision = fields.Integer(dump_only=True)
     updated = fields.Str(dump_only=True)
     links = fields.Dict(dump_only=True)
-    id = fields.Integer(
-        required=True, attribute='metadata.{{ cookiecutter.pid_name }}')
+    id = fields.Method(
+        serialize=get_{{ cookiecutter.pid_name }},
+        deserialize=get_{{ cookiecutter.pid_name }})
