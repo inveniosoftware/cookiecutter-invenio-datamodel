@@ -16,6 +16,9 @@ tests_require = [
     'pytest-cov>=1.8.0',
     'pytest-pep8>=1.0.6',
     'pytest>=2.8.0',
+    'pytest-invenio>=1.0.1',
+    'invenio-app>=1.0.1',
+    'redis>=2.10.6'
 ]
 
 invenio_search_version = '1.0.0'
