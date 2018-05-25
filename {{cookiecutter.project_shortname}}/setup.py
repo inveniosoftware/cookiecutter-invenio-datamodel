@@ -19,7 +19,7 @@ tests_require = [
 ]
 
 invenio_search_version = '1.0.0'
-invenio_db_version = '1.0.0'
+invenio_db_version = '1.0.1'
 
 extras_require = {
     'docs': [
@@ -56,8 +56,7 @@ setup_requires = [
 
 install_requires = [
     'Flask-BabelEx>=0.9.2',
-    # TODO: use the pypi version of invenio-records-rest once it's released
-    # 'invenio-records-rest>=1.0.2,<1.1.0',
+    'invenio-records-rest>=1.1.0,<1.2.0',
     'arrow>=0.12.1',
 ]
 
