@@ -39,7 +39,9 @@ class MetadataSchemaV1(StrictKeysMixin):
         pid = self.context.get('pid')
         return pid.pid_value if pid else missing
 
-    {{ cookiecutter.pid_name }} = fields.Method(deserialize='get_{{ cookiecutter.pid_name }}')
+    {{ cookiecutter.pid_name }} = fields.Function(
+        serialize=get_{{ cookiecutter.pid_name }},
+        deserialize=get_{{ cookiecutter.pid_name }})
     title = SanitizedUnicode(required=True, validate=validate.Length(min=3))
     keywords = fields.Nested(fields.Str(), many=True)
     publication_date = DateString()
@@ -54,6 +56,6 @@ class RecordSchemaV1(StrictKeysMixin):
     revision = fields.Integer(dump_only=True)
     updated = fields.Str(dump_only=True)
     links = fields.Dict(dump_only=True)
-    id = fields.Method(
+    id = fields.Function(
         serialize=get_{{ cookiecutter.pid_name }},
         deserialize=get_{{ cookiecutter.pid_name }})
