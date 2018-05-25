@@ -1,10 +1,10 @@
 {% include 'misc/header.py' %}
-
 """JSON Schemas."""
 
-from invenio_records_rest.schemas.json import StrictKeysMixin
-from invenio_records_rest.serializers.fields import DateString, \
-    SanitizedUnicode
+from __future__ import absolute_import, print_function
+
+from invenio_records_rest.schemas import StrictKeysMixin
+from invenio_records_rest.schemas.fields import DateString, SanitizedUnicode
 from marshmallow import fields, missing, validate
 
 

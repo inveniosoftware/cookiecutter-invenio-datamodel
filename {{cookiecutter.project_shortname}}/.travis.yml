@@ -62,6 +62,6 @@ deploy:
   distributions: "compile_catalog sdist bdist_wheel"
   on:
     tags: true
-    python: "3.5"
+    python: "3.6"
     repo: {{ cookiecutter.github_repo }}
     condition: $DEPLOY = true

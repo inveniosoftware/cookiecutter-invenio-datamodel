@@ -1,5 +1,5 @@
 {% include 'misc/header.py' %}
-"""{{ cookiecutter.description }}"""
+"""Flask extension for {{ cookiecutter.project_name }}."""
 
 from __future__ import absolute_import, print_function
 

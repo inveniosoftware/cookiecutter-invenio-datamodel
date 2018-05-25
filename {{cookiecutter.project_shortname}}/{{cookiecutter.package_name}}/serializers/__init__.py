@@ -1,5 +1,4 @@
 {% include 'misc/header.py' %}
-
 """Record serializers.
 
 Serialization or "dumping" of internal application objects refers to producing
@@ -12,11 +11,13 @@ the provided json_v1 instance.
 
 Also, there are different serializers defined for output of individual record
 requests (json_v1_response) and search results (json_v1_search), as the
-internal objects may not have indentical structures.
+internal objects may not have identical structures.
 For more information on serializers please see
 https://invenio-records-rest.readthedocs.io/en/latest/usage.html#serialization/
 .
 """
+
+from __future__ import absolute_import, print_function
 
 from invenio_records_rest.serializers.json import JSONSerializer
 from invenio_records_rest.serializers.response import record_responsify, \
