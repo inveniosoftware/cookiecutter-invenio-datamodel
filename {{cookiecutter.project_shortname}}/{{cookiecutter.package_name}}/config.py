@@ -2,11 +2,11 @@
 """{{ cookiecutter.description }}"""
 
 from invenio_indexer.api import RecordIndexer
+from invenio_records_rest.utils import allow_all, check_elasticsearch
 from invenio_search import RecordsSearch
 
 RECORDS_REST_ENDPOINTS = {
-    '{{ cookiecutter.pid_name}}':
-    dict(
+    '{{ cookiecutter.pid_name}}': dict(
         pid_type='recid',
         pid_minter='recid',
         pid_fetcher='recid',
@@ -34,6 +34,11 @@ RECORDS_REST_ENDPOINTS = {
         default_media_type='application/json',
         max_result_window=10000,
         error_handlers=dict(),
+        # TODO: Redefine these permissions to cover your auth needs
+        create_permission_factory_imp=allow_all,
+        read_permission_factory_imp=check_elasticsearch,
+        update_permission_factory_imp=allow_all,
+        delete_permission_factory_imp=allow_all,
     ),
 }
 
