@@ -22,15 +22,19 @@ class {{ cookiecutter.extension_class }}(object):
     def init_config(self, app):
         """Initialize configuration.
 
-        This Override configuration variables with the values in this package.
+        Override configuration variables with the values in this package.
         """
+        with_endpoints = app.config.get('{{ cookiecutter.package_name | upper }}_ENDPOINTS_ENABLED', True)
         for k in dir(config):
             if k.startswith('{{ cookiecutter.package_name | upper }}_'):
                 app.config.setdefault(k, getattr(config, k))
-            elif k == 'RECORDS_REST_ENDPOINTS' \
-                    and app.config.get(
-                        '{{ cookiecutter.package_name | upper }}_ENDPOINTS_ENABLED', True):
-                app.config.setdefault('RECORDS_REST_ENDPOINTS', {})
-                app.config['RECORDS_REST_ENDPOINTS'].update(getattr(config, k))
+            elif k == 'SEARCH_UI_JSTEMPLATE_RESULTS':
+                app.config['SEARCH_UI_JSTEMPLATE_RESULTS'] = getattr(
+                    config, k)
             elif k == 'PIDSTORE_RECID_FIELD':
                 app.config['PIDSTORE_RECID_FIELD'] = getattr(config, k)
+            else:
+                for n in ['RECORDS_REST_ENDPOINTS', 'RECORDS_UI_ENDPOINTS']:
+                    if k == n and with_endpoints:
+                        app.config.setdefault(n, {})
+                        app.config[n].update(getattr(config, k))

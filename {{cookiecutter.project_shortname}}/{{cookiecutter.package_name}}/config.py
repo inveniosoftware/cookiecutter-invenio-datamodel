@@ -8,7 +8,7 @@ from invenio_records_rest.utils import allow_all, check_elasticsearch
 from invenio_search import RecordsSearch
 
 RECORDS_REST_ENDPOINTS = {
-    '{{ cookiecutter.pid_name}}': dict(
+    'recid': dict(
         pid_type='recid',
         pid_minter='recid',
         pid_fetcher='recid',
@@ -44,6 +44,15 @@ RECORDS_REST_ENDPOINTS = {
     ),
 }
 
+RECORDS_UI_ENDPOINTS = {
+    'recid': {
+        'pid_type': 'recid',
+        'route': '/records/<pid_value>',
+        'template': '{{ cookiecutter.package_name }}/record.html',
+    },
+}
+
+SEARCH_UI_JSTEMPLATE_RESULTS = 'templates/{{ cookiecutter.package_name }}/results.html'
 
 PIDSTORE_RECID_FIELD = '{{ cookiecutter.pid_name }}'
 

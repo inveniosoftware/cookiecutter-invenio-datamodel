@@ -55,7 +55,7 @@ setup_requires = [
 ]
 
 install_requires = [
-    'Flask-BabelEx>=0.9.2',
+    'Flask-BabelEx>=0.9.3',
     'invenio-records-rest>=1.1.0,<1.2.0',
     'arrow>=0.12.1',
 ]
@@ -74,7 +74,7 @@ setup(
     version=version,
     description=__doc__,
     long_description=readme,
-    keywords='{{ cookiecutter.project_shortname }} Invenio TODO',
+    keywords='{{ cookiecutter.project_shortname }} Invenio',
     license='MIT',
     author='{{ cookiecutter.author_name }}',
     author_email='{{ cookiecutter.author_email }}',
@@ -90,12 +90,15 @@ setup(
         'invenio_base.api_apps': [
             '{{ cookiecutter.package_name }} = {{ cookiecutter.package_name }}:{{ cookiecutter.extension_class }}',
         ],
+        'invenio_base.blueprints': [
+            '{{ cookiecutter.package_name }} = {{ cookiecutter.package_name }}.views:blueprint',
+        ],
         'invenio_jsonschemas.schemas': [
             '{{ cookiecutter.package_name}} = {{ cookiecutter.package_name}}.jsonschemas'
         ],
         'invenio_search.mappings': [
             'records = {{ cookiecutter.package_name}}.mappings'
-        ]
+        ],
     },
     extras_require=extras_require,
     install_requires=install_requires,
