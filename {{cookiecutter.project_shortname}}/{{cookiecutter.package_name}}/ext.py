@@ -24,7 +24,8 @@ class {{ cookiecutter.extension_class }}(object):
 
         Override configuration variables with the values in this package.
         """
-        with_endpoints = app.config.get('{{ cookiecutter.package_name | upper }}_ENDPOINTS_ENABLED', True)
+        with_endpoints = app.config.get(
+            '{{ cookiecutter.package_name | upper }}_ENDPOINTS_ENABLED', True)
         for k in dir(config):
             if k.startswith('{{ cookiecutter.package_name | upper }}_'):
                 app.config.setdefault(k, getattr(config, k))

@@ -1,5 +1,5 @@
 {% include 'misc/header.py' %}
-"""{{ cookiecutter.description }}"""
+"""Default configuration."""
 
 from __future__ import absolute_import, print_function
 
@@ -28,8 +28,6 @@ RECORDS_REST_ENDPOINTS = {
         record_loaders={
             'application/json': ('{{ cookiecutter.package_name }}.loaders'
                                  ':json_v1'),
-            'application/json-patch+json': ('{{ cookiecutter.package_name }}.'
-                                            'loaders:json_patch_v1')
         },
         list_route='/records/',
         item_route='/records/<pid(recid):pid_value>',
@@ -43,6 +41,7 @@ RECORDS_REST_ENDPOINTS = {
         delete_permission_factory_imp=allow_all,
     ),
 }
+"""REST API for {{cookiecutter.project_shortname}}."""
 
 RECORDS_UI_ENDPOINTS = {
     'recid': {
@@ -51,9 +50,12 @@ RECORDS_UI_ENDPOINTS = {
         'template': '{{ cookiecutter.package_name }}/record.html',
     },
 }
+"""Records UI for {{cookiecutter.project_shortname}}."""
 
 SEARCH_UI_JSTEMPLATE_RESULTS = 'templates/{{ cookiecutter.package_name }}/results.html'
+"""Result list template."""
 
 PIDSTORE_RECID_FIELD = '{{ cookiecutter.pid_name }}'
 
 {{ cookiecutter.package_name | upper }}_ENDPOINTS_ENABLED = True
+"""Enable/disable automatic endpoint registration."""
