@@ -10,7 +10,7 @@ from marshmallow import fields, missing, validate
 
 def get_{{ cookiecutter.pid_name }}(obj, context):
     """Get record id."""
-    pid = self.context.get('pid')
+    pid = context.get('pid')
     return pid.pid_value if pid else missing
 
 
