@@ -9,4 +9,9 @@ Contributors
 ============
 
 Alexander Ioannidis
+Chiara Bigarella
+Dinos Kousidis
 Esteban J. G. Gabancho
+Lars Holm Nielsen
+Sebastian Witowski
+Tibor Simko
