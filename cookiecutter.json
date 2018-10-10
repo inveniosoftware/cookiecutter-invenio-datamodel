@@ -6,7 +6,7 @@
     "description": "Invenio data model.",
     "author_name": "CERN",
     "author_email": "info@inveniosoftware.org",
-    "year": "2018",
+    "year": "{% now 'local', '%Y' %}",
     "copyright_holder": "{{ cookiecutter.author_name }}",
     "extension_class": "{{ cookiecutter.project_name | replace('-', '') | replace(' ', '') }}",
     "pid_name": "id"
